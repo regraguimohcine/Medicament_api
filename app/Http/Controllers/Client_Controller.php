@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Livreur;
+use App\Client;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Http\Request;
 
-class Livreur_Controller extends Controller
+class Client_Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,9 @@ class Livreur_Controller extends Controller
      */
     public function index()
     {
-        $Livreur=Livreur::all();
+        $Client=Client::all();
         $Array_l=[];
-        foreach ($Livreur as $L) {
+        foreach ($Client as $L) {
             $User=User::find($L->id_user);
             array_push($Array_l,array_merge($L->toArray(),$User->toArray()));
         }
@@ -41,42 +42,43 @@ class Livreur_Controller extends Controller
         $User->telephone=$request->input('telephone');
         $User->email=$request->input('email');
         $User->password=Hash::make($request->input("password"));
-        $User->user_type='Livreur';
+        $User->user_type='Client';
         $User->save();
 
-        $Livreur=new Livreur();
-        $Livreur->id_user=$User->id;
-        $Livreur->save();
+        $Client=new Client();
+        $Client->id_user=$User->id;
+        $Client->save();
 
-        return response()->json(array_merge($User->toArray(),$Livreur->toArray()),200);
+        return response()->json(array_merge($User->toArray(),$Client->toArray()),200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Livreur  $livreur
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $Array_l=[];
-        $Livreur=Livreur::find($id);
-        $User=User::find($Livreur->id_user);
-        array_push($Array_l,array_merge($Livreur->toArray(),$User->toArray()));
+        $Client=Client::find($id);
+        $User=User::find($Client->id_user);
+        array_push($Array_l,array_merge($Client->toArray(),$User->toArray()));
         return response()->json($Array_l,200);
     }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Livreur  $livreur
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $Livreur=Livreur::find($id);
-        $User=User::find($Livreur->id_user);
+        $Client=Client::find($id);
+        $User=User::find($Client->id_user);
         $User->nom=$request->input('nom');
         $User->prenom=$request->input('prenom');
         $User->adresse=$request->input('adresse');
@@ -89,15 +91,15 @@ class Livreur_Controller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Livreur  $livreur
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $Livreur=Livreur::find($id);
-        $User=User::find($Livreur->id_user);
+        $Client=Client::find($id);
+        $User=User::find($Client->id_user);
         $User->delete();
-        $Livreur->delete();
+        $Client->delete();
         return response()->json($User,200);
     }
 }

@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('Pharmacie', 'Pharmacie_controller');
 Route::resource('Livreur', 'Livreur_controller');
 Route::resource('Admin_pharmacie', 'Admin_pharmacie_Controller');
+Route::resource('Client', 'Client_Controller');
+
