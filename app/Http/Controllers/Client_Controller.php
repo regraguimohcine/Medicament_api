@@ -60,11 +60,11 @@ class Client_Controller extends Controller
      */
     public function show($id)
     {
-        $Array_l=[];
+       // $Array_l=[];
         $Client=Client::find($id);
         $User=User::find($Client->id_user);
-        array_push($Array_l,array_merge($Client->toArray(),$User->toArray()));
-        return response()->json($Array_l,200);
+      //  array_push($Array_l,array_merge($Client->toArray(),$User->toArray()));
+        return response()->json(array_merge($Client->toArray(),$User->toArray()),200);
     }
 
 

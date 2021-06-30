@@ -59,11 +59,11 @@ class Livreur_Controller extends Controller
      */
     public function show($id)
     {
-        $Array_l=[];
+    //    $Array_l=[];
         $Livreur=Livreur::find($id);
         $User=User::find($Livreur->id_user);
-        array_push($Array_l,array_merge($Livreur->toArray(),$User->toArray()));
-        return response()->json($Array_l,200);
+      //  array_push($Array_l,array_merge($Livreur->toArray(),$User->toArray()));
+        return response()->json(array_merge($Livreur->toArray(),$User->toArray()),200);
     }
 
     /**
