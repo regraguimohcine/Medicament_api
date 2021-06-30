@@ -22,4 +22,6 @@ Route::resource('Pharmacie', 'Pharmacie_controller');
 Route::resource('Livreur', 'Livreur_controller');
 Route::resource('Admin_pharmacie', 'Admin_pharmacie_Controller');
 Route::resource('Client', 'Client_Controller');
+Route::POST('Login','Auth_controller@login');
+Route::POST('Register','Auth_controller@register');
 
